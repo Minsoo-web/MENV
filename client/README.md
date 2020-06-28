@@ -1,24 +1,13 @@
-# client
+# heroku MEVN app
 
-## Project setup
-```
-npm install
-```
+## run dev server
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+`npm run dev`
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## run api server
 
-### Lints and fixes files
-```
-npm run lint
-```
+`npm run server`
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## deploy to heroku
+
+`git push heroku master`

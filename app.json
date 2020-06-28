@@ -8,10 +8,6 @@
         }
       }
     },
-    "buildpacks": [
-      { "url": "https://github.com/heroku/heroku-buildpack-google-chrome" },
-      { "url": "heroku/nodejs" }
-    ],
     "scripts": {
       "test": "npm test && npx cypress install && npm run cypress:test"
     }

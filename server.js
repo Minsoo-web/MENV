@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const { PORT, mongoUri } = require("./config");
+const { PORT } = require("./config");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -13,7 +13,7 @@ app.use(morgan("tiny")); // 요청에 대한 log를 남겨주는 미들웨어
 app.use(bodyParser.json()); // POST 요청에 대한 body 값을 받아올 수 있게 해주는 미들웨어
 
 mongoose
-  .connect(mongoUri, {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,

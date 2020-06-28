@@ -11,8 +11,7 @@
     "build": "npm install --prefix client && npm run build --prefix client",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --headless --browser chrome --config video=false",
-    "cypress:test": "start-server-and-test start http://localhost:8080 cypress:run",
-    "test": "jest"
+    "cypress:test": "start-server-and-test start http://localhost:8080 cypress:run"
   },
   "keywords": [],
   "author": "",

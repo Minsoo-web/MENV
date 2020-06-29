@@ -1,4 +1,5 @@
 {
+  "stack": "cedar-14",
   "environments": {
     "test": {
       "formation": {
@@ -12,7 +13,8 @@
         { "url": "heroku/nodejs" }
       ],
       "scripts": {
-        "test": "apt-get install libgtk2.0-0 libgtk-3-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb && npm test"
+        "test-setup": "whoami && node -e 'console.log(process.geteuid())' && npx cypress install && npx cypress cache path && npx cypress cache list && npx cypress verify",
+        "test": "npm test"
       }
     }
   }

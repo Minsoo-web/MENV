@@ -12,7 +12,7 @@
         { "url": "heroku/nodejs" }
       ],
       "scripts": {
-        "test": "npm test && npx cypress install && npm run cypress:test"
+        "test": "npm test"
       }
     }
   }

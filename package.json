@@ -10,9 +10,8 @@
     "start": "node server.js",
     "build": "npm install --prefix client && npm run build --prefix client",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run --headless --browser chrome --config video=false",
-    "cypress:test": "start-server-and-test start http://localhost:8080 cypress:run",
-    "test": "jest"
+    "cypress:run": "cypress run --browser chrome --config video=false",
+    "test": "npm run cypress:run"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +19,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.20",
     "morgan": "^1.10.0"
@@ -29,6 +29,7 @@
     "cross-env": "^7.0.2",
     "cypress": "^4.9.0",
     "nodemon": "^2.0.4",
-    "start-server-and-test": "^1.11.0"
+    "start-server-and-test": "^1.11.0",
+    "xvfb": "^0.3.0"
   }
 }

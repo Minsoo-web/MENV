@@ -21,15 +21,15 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.20",
+    "mongoose": "^5.9.27",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
     "cross-env": "^7.0.2",
-    "cypress": "^4.9.0",
+    "cypress": "^4.11.0",
     "nodemon": "^2.0.4",
-    "start-server-and-test": "^1.11.0",
-    "xvfb": "^0.3.0"
+    "start-server-and-test": "^1.11.2",
+    "xvfb": "^0.4.0"
   }
 }

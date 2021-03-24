@@ -1,34 +1,16 @@
-# news-feed
+# Touchless Button with vl6180x ToF using Arduino
 
-## Project setup
-```
-npm install
-```
+## library
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+[pololu-vl6180x 공식 라이브러리](https://github.com/pololu/vl6180x-arduino)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Pin info
 
-### Run your unit tests
-```
-npm run test:unit
-```
+5V Arduino boards
 
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+| Arduino | VL6180X board |
+| ------- | ------------- |
+| 5V      | VIN           |
+| GND     | GND           |
+| A4      | SDA           |
+| A5      | SCL           |

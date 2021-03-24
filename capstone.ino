@@ -10,8 +10,8 @@ VL6180X sensor_A, sensor_B;
 #define GPIO_A 3
 #define GPIO_B 4
 
-Servo servo_list[2][2] = {{servo1, servo2}, {servo3, servo4}};
-int led_pin_list[2][2] = {{3, 4}, {5, 6}};
+Servo servo_list[2][2] = {{servo1, servo2}, {servo3, servo4}}; // 10, 11, 12, 13
+int led_pin_list[2][2] = {{6, 7}, {8, 9}};
 bool floor_state[2][2] = {{false, false}, {false, false}};
 
 void setup()
@@ -20,7 +20,7 @@ void setup()
     // set the pin mode to OUTPUT for led pin
     for (int i = 0; i < 4; i++)
     {
-        pinMode(i + 5, OUTPUT);
+        pinMode(i + 6, OUTPUT);
     }
 
     //Set the pin mode to output
@@ -61,15 +61,15 @@ void turn_on(int row_number, int pin_number_of_on)
     if (floor_state[row_number][pin_number_of_on])
     {
         floor_state[row_number][pin_number_of_on] = false;
-        digitalWrite(pin_number_of_on + 2, LOW); // led off
-        servo_on(row_number, pin_number_of_on);  // activate servo
+        digitalWrite(led_pin_list[row_number][pin_number_of_on], LOW); // led off
+        servo_on(row_number, pin_number_of_on);                        // activate servo
     }
     // 해당 층수가 꺼져있으면
     else
     {
         floor_state[row_number][pin_number_of_on] = true;
-        digitalWrite(pin_number_of_on + 2, HIGH); // led on
-        servo_on(row_number, pin_number_of_on);   // activate servo
+        digitalWrite(led_pin_list[row_number][pin_number_of_on], HIGH); // led on
+        servo_on(row_number, pin_number_of_on);                         // activate servo
     }
 }
 
@@ -77,7 +77,7 @@ void servo_off(int servo_number)
 {
     for (int j = 0; j < 2; j++)
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
         {
             if (i != servo_number)
             {
@@ -89,9 +89,14 @@ void servo_off(int servo_number)
 
 void servo_on(int row_number, int level_number)
 {
+    int index = 0;
+    if (row_number == 1)
+    {
+        index = 2;
+    }
     servo_off(level_number);
     delay(100);
-    servo_list[row_number][level_number].attach(level_number + 8);
+    servo_list[row_number][level_number].attach(level_number + index + 10);
     delay(100);
     servo_list[row_number][level_number].write(60);
     delay(500);
@@ -103,46 +108,49 @@ void loop()
     int centimeters_1 = sensor_A.readRangeSingleMillimeters() / 10;
     int centimeters_2 = sensor_B.readRangeSingleMillimeters() / 10;
 
-    if (centimeters_1 < 15)
+    if (centimeters_1 > 15)
     {
-        Serial.println("sensor A");
+        servo_off(99);
     }
-    if (centimeters_2 < 15)
+    else
     {
-        Serial.println("sensor B");
+        if (centimeters_1 < 5)
+        {
+            turn_on(0, 0);
+            Serial.print("SENSOR A ");
+            Serial.println("1층");
+            delay(1000);
+        }
+        else if (centimeters_1 < 8)
+        {
+            turn_on(0, 1);
+            Serial.print("SENSOR A ");
+            Serial.println("2층");
+            delay(1000);
+        }
     }
 
-    //  if (centimeters_1 > 15) {
-    //    servo_off(99);
-    //  } else {
-    //    if (centimeters_1 < 5) {
-    //      Serial.print("sensor1");
-    //      turn_on(0,0);
-    //      delay(1000);
-    //    } else if (centimeters_1 < 8){
-    //      turn_on(0,1);
-    //      delay(1000);
-    //    } else if (centimeters_1 < 11){
-    //      turn_on(0,2);
-    //      delay(1000);
-    //    }
-    //  }
-    //
-    //  if (centimeters_2 > 15) {
-    //    servo_off(99);
-    //  } else {
-    //    if (centimeters_2 < 5) {
-    //      Serial.print("sensor2");
-    //      turn_on(1,3);
-    //      delay(1000);
-    //    } else if (centimeters_2 < 8){
-    //      turn_on(1,4);
-    //      delay(1000);
-    //    } else if (centimeters_2 < 11){
-    //      turn_on(1,5);
-    //      delay(1000);
-    //    }
-    //  }
+    if (centimeters_2 > 15)
+    {
+        servo_off(99);
+    }
+    else
+    {
+        if (centimeters_2 < 5)
+        {
+            turn_on(1, 0);
+            Serial.print("SENSOR B ");
+            Serial.println("1층");
+            delay(1000);
+        }
+        else if (centimeters_2 < 8)
+        {
+            turn_on(1, 1);
+            Serial.print("SENSOR B ");
+            Serial.println("2층");
+            delay(1000);
+        }
+    }
 
     // 에러 처리
     if (sensor_A.timeoutOccurred())
